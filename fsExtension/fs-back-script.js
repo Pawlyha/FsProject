@@ -5,13 +5,13 @@
 
 (function(webRequest){
 
-	var movieResponse = undefined;
-
 	function VideoResponse(type, length, url) {
-		contentType : undefined;
-		contentLength : 0;
-		url : undefined;
+		this.contentType = type;
+		this.contentLength = typeof length !== 'undefined' ? length : 0;
+		this.url = url;
 	};
+
+	var movieResponse = new VideoResponse();
 
 	// save video response with the longest content
 	function onResponseStartHandler(response){
@@ -36,12 +36,10 @@
 			});
 
 			// if video file is longer then current -> rewrite current
-			if(movieResponse == null || tmp.contentLength > movieResponse.contentLength){
+			if(tmp.contentLength > movieResponse.contentLength){
 				movieResponse = tmp;
 			}
 		}
-
-		//console.log(movieResponse);
 	}
 
 	var filter = {

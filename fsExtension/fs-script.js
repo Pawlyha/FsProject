@@ -13,11 +13,11 @@
 	// get currently played video data
 	$('#fs-ext-button').on('click', function(){
 		chrome.runtime.sendMessage({request: "get_video_response"}, function(response){
-			if(response != null){
+			if(response != null && response.contentLength !== 0){
 				videoResponse = response;
 				openPlayerWindow(host + response.url);
 			}else{
-				alert("please, start video playing and try again.")
+				alert("Video is not found. Please, restart video playing and try again.")
 			}
 
 		});

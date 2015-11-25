@@ -1,0 +1,31 @@
+{
+  "manifest_version": 2,
+
+  "name": "fs.to extension",
+  "description": "detect video url and redirect to custom web player",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "fs-icon.png",
+    "default_popup": "main.html"
+  },
+
+  "background": {
+    "scripts": ["fs-back-script.js"],
+    "persistent": true
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["http://fs.to/video/films/*", "http://fs.ua/video/films/*"],
+      "css": ["style.css"],
+      "js": ["jquery-2.1.4.min.js", "fs-script.js"]
+    }
+  ],
+
+  "permissions": [
+    "<all_urls>",
+    "activeTab",
+    "webRequest"
+  ]
+}

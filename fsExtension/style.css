@@ -1,0 +1,28 @@
+
+
+.btn{
+	position: fixed;
+	margin-top: 10%;
+
+	color: #b6d6db;
+	background-color: #4c4e60;
+	border-radius: 5px;
+}
+
+.btn-large{
+	height: 50px;
+	width: 100px;
+}
+
+
+#fs-ext-button{
+	z-index: 103;
+}
+
+input.right{
+	right:0;
+}
+
+#fs-ext-button:hover{
+	cursor: pointer;
+}

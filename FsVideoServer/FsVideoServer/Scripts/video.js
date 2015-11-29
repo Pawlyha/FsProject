@@ -31,44 +31,39 @@ var videoService = (function ($) {
     return module;
 })(jQuery);
 
+
+
 (function ($, vs) {
+
+    // set up signarR connection
     var hub = $.connection.videoHub;
     var videoPlayer = $("#fs-video-player").get(0);
 
+    // user actions with the video player
     hub.client.videoAction = function (data) {
-        console.log(data);
-
         if (data.action === "play" && videoPlayer.paused) {
             videoPlayer.play();
-        } else if (data.action === "pause" && videoPlayer.played) {
+        }
+        else if (data.action === "pause" && videoPlayer.played) {
             videoPlayer.pause();
-        } else if (data.action === "setVolume") {
+        }
+        else if (data.action === "setVolume") {
             if (0 <= data.value <= 1) {
                 videoPlayer.volume = data.value;
             }
         }
+        else if (data.action === "setTime") {
+            if (0 <= data.value <= 1) {
+                var newTime = videoPlayer.duration * data.value;
+                videoPlayer.currentTime = newTime;
+            }
+        }
     };
 
-
+    // get sessionId from cookies and send to server 
+    $.connection.hub.qs = { UserSessionId: $.cookie("client") };
     $.connection.hub.start().done(function () {
-        console.log("connection is settled");
-    });
-
-
-    $('#play-btn').click(function () {
-        vs.play();
-    });
-
-    $('#pause-btn').click(function () {
-        vs.pause();
-    });
-
-    $('#volume-up').click(function () {
-        vs.setVolume(0.8);
-    });
-
-    $('#volume-down').click(function () {
-        vs.setVolume(0.2);
+        // sending qs to the server method
     });
 
 })(jQuery, videoService);

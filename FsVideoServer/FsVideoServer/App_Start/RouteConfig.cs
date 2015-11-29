@@ -14,6 +14,17 @@ namespace FsVideoServer
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapMvcAttributeRoutes();
+
+            routes.MapRoute(
+            name: "Template",
+            url: "{controller}/{action}/{id}",
+            defaults: new
+            {
+                controller = "Video",
+                action = "Index",
+                id = UrlParameter.Optional
+            }
+        );
            
         }
     }

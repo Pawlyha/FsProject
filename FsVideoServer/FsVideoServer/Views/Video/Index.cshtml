@@ -1,4 +1,9 @@
-﻿@model string
+﻿@model DbLibrary.UserSession
+
+@{
+    ViewBag.Title = "Fs Video";
+}
+
 @section scripts
 {
     <script src="Scripts/jquery.signalR-2.2.0.min.js"></script>
@@ -7,14 +12,9 @@
     <script src="~/Scripts/video.js"></script>
 }
 
+<div class="container" id="video-container">
+    <video id="fs-video-player" class="video-lg" controls>
+        <source src="@ViewBag.Url" type="video/mp4">
+    </video>
+</div>
 
-<h1>Video</h1>
-<video id="fs-video-player" controls>
-    <source src="@Model" type="video/mp4">
-</video>
-
-
-    <button id="play-btn">play</button>
-    <button id="pause-btn">pause</button>
-    <button id="volume-up">up</button>
-    <button id="volume-down">down</button>
